@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Settings = (function () {
     function Settings() {
     }
@@ -19,4 +20,4 @@ var MappingOptions = (function () {
     return MappingOptions;
 }());
 exports.MappingOptions = MappingOptions;
-//# sourceMappingURL=/Users/andreas/Documents/Git/git.appvision.ch/unibasel/json2typescript/src/json2typescript/json-convert-options.js.map
+//# sourceMappingURL=/Users/alan/IdeaProjects/json2typescript/src/json2typescript/json-convert-options.js.map

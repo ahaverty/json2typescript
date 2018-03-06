@@ -1,7 +1,10 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var json_convert_enums_1 = require("./json-convert-enums");
 var json_convert_options_1 = require("./json-convert-options");
 var any_1 = require("./any");
+var forOwn = require("lodash.forown");
+var isEmpty = require("lodash.isempty");
 var JsonConvert = (function () {
     function JsonConvert(operationMode, valueCheckingMode, ignorePrimitiveChecks) {
         this._operationMode = json_convert_enums_1.OperationMode.ENABLE;
@@ -242,6 +245,7 @@ var JsonConvert = (function () {
         return null;
     };
     JsonConvert.prototype.verifyProperty = function (expectedJsonType, value, serialize) {
+        var _this = this;
         if (expectedJsonType === any_1.Any || expectedJsonType === null || expectedJsonType === Object) {
             return value;
         }
@@ -292,7 +296,11 @@ var JsonConvert = (function () {
         if (expectedJsonType instanceof Array && value instanceof Array) {
             var array = [];
             if (value.length === 0) {
-                return array;
+                var map_1 = {};
+                forOwn(value, function (v, k) {
+                    map_1[k] = _this.serialize(v);
+                });
+                return isEmpty(map_1) ? array : map_1;
             }
             if (expectedJsonType.length === 0) {
                 return value;
@@ -391,4 +399,4 @@ var JsonConvert = (function () {
     return JsonConvert;
 }());
 exports.JsonConvert = JsonConvert;
-//# sourceMappingURL=/Users/andreas/Documents/Git/git.appvision.ch/unibasel/json2typescript/src/json2typescript/json-convert.js.map
+//# sourceMappingURL=/Users/alan/IdeaProjects/json2typescript/src/json2typescript/json-convert.js.map
