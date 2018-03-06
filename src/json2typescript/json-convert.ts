@@ -1,6 +1,8 @@
 import { OperationMode, ValueCheckingMode } from "./json-convert-enums";
 import { MappingOptions, Settings } from "./json-convert-options";
 import { Any } from "./any";
+import forOwn = require('lodash.forown');
+import isEmpty = require('lodash.isempty');
 
 /**
  * Offers a simple API for mapping JSON objects to TypeScript/JavaScript classes and vice versa.
@@ -617,7 +619,11 @@ export class JsonConvert {
 
             // No data given, so return empty value
             if (value.length === 0) {
-                return array;
+                let map: any = {};
+                forOwn(value, (v, k) => {
+                    map[k] = this.serialize(v);
+                });
+                return isEmpty(map) ? array : map;
             }
 
             // We obviously don't care about the type, so return the value as is

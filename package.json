@@ -28,7 +28,10 @@
   "typescript": {
     "definition": "src/index.d.ts"
   },
-  "dependencies": {},
+  "dependencies": {
+    "lodash.forown": "4.4.0",
+    "lodash.isempty": "4.4.0"
+  },
   "devDependencies": {
     "@types/jasmine": "^2.5.52",
     "jasmine": "2.8.0",
@@ -38,7 +41,9 @@
     "karma-phantomjs-launcher": "1.0.4",
     "karma-typescript": "^3.0.3",
     "phantomjs-prebuilt": "2.1.15",
-    "typescript": "2.5.3"
+    "typescript": "2.5.3",
+    "@types/lodash.forown": "4.4.3",
+    "@types/lodash.isempty": "4.4.3"
   },
   "main": "index.js",
   "files": [
@@ -47,7 +52,8 @@
     "src/json2typescript/*.js",
     "index.d.ts",
     "index.map",
-    "index.js"
+    "index.js",
+    "node_modules"
   ],
   "repository": {
     "type": "git",
