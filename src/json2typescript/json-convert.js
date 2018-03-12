@@ -108,10 +108,22 @@ var JsonConvert = (function () {
         return jsonArray;
     };
     JsonConvert.prototype.deserialize = function (json, classReference) {
-        if (json.constructor === Array)
-            return this.deserializeArray(json, classReference);
-        if (typeof json === "object")
-            return this.deserializeObject(json, classReference);
+        try {
+            if (json.constructor === Array)
+                return this.deserializeArray(json, classReference);
+        }
+        catch (error) {
+            console.error("Failed to deserialize for class reference: " + classReference);
+            throw error;
+        }
+        try {
+            if (typeof json === "object")
+                return this.deserializeObject(json, classReference);
+        }
+        catch (error) {
+            console.error("Failed to deserialize for class reference: " + classReference);
+            throw error;
+        }
         throw new Error("Fatal error in JsonConvert. " +
             "Passed parameter json in JsonConvert.deserialize() is not in valid JSON format (object or array).");
     };
