@@ -5,6 +5,7 @@ var json_convert_options_1 = require("./json-convert-options");
 var any_1 = require("./any");
 var forOwn = require("lodash.forown");
 var isEmpty = require("lodash.isempty");
+var json_convert_hooks_1 = require("./json-convert-hooks");
 var JsonConvert = (function () {
     function JsonConvert(operationMode, valueCheckingMode, ignorePrimitiveChecks) {
         this._operationMode = json_convert_enums_1.OperationMode.ENABLE;
@@ -69,6 +70,9 @@ var JsonConvert = (function () {
             console.log("----------");
             console.log("Receiving JavaScript instance:");
             console.log(instance);
+        }
+        if (json_convert_hooks_1.JsonConvertHooksUtil.canBefore(instance)) {
+            instance.before();
         }
         var jsonObject = {};
         for (var _i = 0, _a = Object.keys(instance); _i < _a.length; _i++) {

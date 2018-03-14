@@ -3,6 +3,7 @@ import { MappingOptions, Settings } from "./json-convert-options";
 import { Any } from "./any";
 import forOwn = require('lodash.forown');
 import isEmpty = require('lodash.isempty');
+import { JsonConvertHooksUtil } from "./json-convert-hooks";
 
 /**
  * Offers a simple API for mapping JSON objects to TypeScript/JavaScript classes and vice versa.
@@ -196,6 +197,10 @@ export class JsonConvert {
             console.log("----------");
             console.log("Receiving JavaScript instance:");
             console.log(instance);
+        }
+
+        if(JsonConvertHooksUtil.canBefore(instance)) {
+            instance.before();
         }
 
         let jsonObject: any = {};
